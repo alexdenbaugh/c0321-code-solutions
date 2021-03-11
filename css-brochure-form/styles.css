@@ -1,0 +1,27 @@
+h2,
+label,
+button {
+  font-family: 'Brandon Grotesque', sans-serif;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.input-text,
+#number-of-engineers {
+  font-family: 'AtlasGrotesk', sans-serif;
+  font-style: normal;
+}
+
+/*
+#enter-name::placeholder {
+
+}
+
+#enter-email::placeholder {
+
+}
+
+#enter-location::placeholder {
+
+}
+*/
