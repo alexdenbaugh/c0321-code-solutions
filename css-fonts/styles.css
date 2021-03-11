@@ -1,0 +1,9 @@
+h1, h2 {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+p {
+  font-family: 'Cormorant Unicase', serif;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  line-height: 25px;
+}
