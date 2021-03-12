@@ -19,52 +19,57 @@ h2 {
 }
 
 h2,
-form {
+#form-container {
   text-align: center;
 }
 
 input {
-  width: 42%;
   height: 2.5rem;
-  border-radius: 7px;
+  width: 31em;
+  border-radius: 6px;
   border: thin solid rgba(145, 145, 145, 0.377);
   padding-left: 10px;
   color: rgba(145, 145, 145, 0.377);
   margin-bottom: 15px;
 }
 
+label {
+  text-align: start;
+}
+
 #label-email {
   font-size: 8pt;
   color: black;
   font-weight: 500;
-  margin-right: 28em;
+  text-align: left;
 }
 
 #label-name {
   font-size: 8pt;
   color: black;
   font-weight: 500;
-  margin-right: 33em;
+
+  /* margin-right: 33em; */
 }
 
 #label-location {
   font-size: 8pt;
   color: black;
   font-weight: 500;
-  margin-right: 24em;
+
+  /* margin-right: 24em; */
 }
 
 #label-select {
   font-size: 8pt;
   color: black;
   font-weight: 500;
-  margin-right: 5em;
 }
 
 select {
-  width: 42%;
+  width: 31em;
   height: 2.5rem;
-  border-radius: 7px;
+  border-radius: 5px;
   border: thin solid rgba(145, 145, 145, 0.377);
   padding-left: 2px;
   color: black;
@@ -81,5 +86,6 @@ button {
   height: 33px;
   border: thin solid rgba(145, 145, 145, 0.377);
   font-weight: 500;
-  margin-left: 32%;
+
+  /* margin-left: 32%; */
 }
