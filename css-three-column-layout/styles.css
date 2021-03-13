@@ -1,0 +1,46 @@
+/* width, height, padding, border, border-color, border-radius, margin,
+justify-content, align-items, flex-basis, font-family, text-align, color
+background-color, line-height */
+
+/* h2 {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+} */
+
+body {
+  background-color: rgba(36, 167, 255, 0.952);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: center;
+  margin-top: 40px auto;
+  max-width: 800px;
+}
+
+.row {
+  display: flex;
+  text-align: center;
+}
+
+h2,
+h3,
+p {
+  color: white;
+}
+
+.full-width {
+  flex-basis: 100%;
+}
+
+.one-third-width {
+  flex-basis: calc(100% / 3);
+}
+
+img {
+  width: 15%;
+  background-color: white;
+}
