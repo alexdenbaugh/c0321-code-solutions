@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,30 +10,32 @@
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <h2>learn more</h2>
-  <div id="form-container">
+  <div class="container">
+    <h2>learn more</h2>
     <form>
-      <div>
-        <label for="enter-email" id="label-email">company email</label>
+      <div id="label-email">
+        <label for="enter-email">company email</label>
       </div>
       <div>
         <input type="email" name="email" class="input-text" id="enter-email" placeholder="sally@company.co">
       </div>
       <div>
-        <label for="enter-name" id="label-name">name</label>
+        <label for="enter-name">name</label>
       </div>
       <div>
         <input type="text" name="person-name" class="input-text" id="enter-name" placeholder="Sally Smith">
       </div>
       <div>
-        <label for="enter-location" id="label-location">where are you hiring?</label>
+        <label for="enter-location">where are you hiring?</label>
       </div>
       <div>
         <input type="text" name="location" class="input-text" id="enter-location" placeholder="City, Country">
       </div>
       <div>
-        <label for="number-of-engineers" id="label-select">how many engineers are you hiring in the next 6 months?</label>
+        <label for="number-of-engineers">how many engineers are you hiring in the next 6
+          months?</label>
       </div>
       <div>
         <select name="engineer-hiring" id="number-of-engineers">
@@ -41,10 +44,11 @@
           <option value="engineers-3">10+ Engineers</option>
         </select>
       </div>
-      <div>
+      <div id="button-align">
         <button type="submit">submit</button>
       </div>
     </form>
   </div>
 </body>
+
 </html>
