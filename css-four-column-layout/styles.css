@@ -1,0 +1,43 @@
+.container {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 800px;
+  background-color: #f7f8fa;
+}
+
+.row {
+  margin: auto;
+  display: flex;
+  width: 800px;
+  justify-content: center;
+}
+
+div.row-title > h2 {
+  text-transform: capitalize;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 25 px;
+}
+
+div.column {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  flex-basis: 25%;
+  margin: 10px;
+}
+
+div.column-image > img {
+  flex-basis: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+div.column-icon > img {
+  flex-basis: 25%;
+  width: 25%;
+  margin: 2px 10px;
+}
