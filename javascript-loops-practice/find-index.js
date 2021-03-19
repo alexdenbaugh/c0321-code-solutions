@@ -1,16 +1,11 @@
 /* exported findIndex */
 function findIndex(array, value) {
-  var i = array.length;
-  var j = 0;
   var indexValue = -1;
-  if (i > 0) {
-    while (i > 0) {
-      if (array[j] === value) {
-        indexValue = j;
+  if (array.length > 0) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === value) {
+        indexValue = i;
         break;
-      } else {
-        i--;
-        j++;
       }
     }
   } else {

@@ -1,13 +1,9 @@
 /* exported filterOutStrings */
 function filterOutStrings(values) {
   var newArray = [];
-  var i = values.length;
-  while (i > 0) {
-    if (typeof (values[i - 1]) === typeof (7)) {
-      newArray.unshift(values[i - 1]);
-      i--;
-    } else {
-      i--;
+  for (var i = 0; i < values.length; i++) {
+    if (typeof (values[i]) === typeof (7)) {
+      newArray.push(values[i]);
     }
   }
   return newArray;

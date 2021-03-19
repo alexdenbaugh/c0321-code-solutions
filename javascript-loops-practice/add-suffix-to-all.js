@@ -1,10 +1,8 @@
 /* exported addSuffixToAll */
 function addSuffixToAll(words, suffix) {
   var newArray = [];
-  var i = words.length;
-  while (i > 0) {
-    newArray.unshift(words[i - 1] + suffix);
-    i--;
+  for (var i = 0; i < words.length; i++) {
+    newArray.push(words[i] + suffix);
   }
   return newArray;
 }
