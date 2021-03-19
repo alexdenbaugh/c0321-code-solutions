@@ -14,13 +14,9 @@
 .row {
   display: flex;
   flex-basis: 100%;
-
-  /* width: 1000px; */
   flex-direction: row;
   justify-content: space-evenly;
   margin: 0;
-
-  /* border: black thin solid; */
 }
 
 .column {
@@ -29,8 +25,6 @@
   width: 200px;
   margin: 0 5px;
   align-content: flex-end;
-
-  /* border: red thin solid; */
 }
 
 h1 {
