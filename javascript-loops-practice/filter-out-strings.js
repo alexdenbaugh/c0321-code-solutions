@@ -2,7 +2,7 @@
 function filterOutStrings(values) {
   var newArray = [];
   for (var i = 0; i < values.length; i++) {
-    if (typeof (values[i]) === typeof (7)) {
+    if (typeof (values[i]) !== typeof ('string')) {
       newArray.push(values[i]);
     }
   }
