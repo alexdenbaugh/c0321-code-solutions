@@ -1,7 +1,7 @@
 /* exported swapChars */
-// function swapChars(firstIndex, secondIndex, string) {
-//   var array = string.split('');
-//   for (var i = 0; i < string.length; i++) {
-//     if (i = firstIndex)
-//   };
-// };
+function swapChars(firstIndex, secondIndex, string) {
+  var array = string.split('');
+  array[firstIndex] = string[secondIndex];
+  array[secondIndex] = string[firstIndex];
+  return array.join('');
+}
