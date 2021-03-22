@@ -1,19 +1,12 @@
 /* exported capitalizeWords */
 function capitalizeWords(string) {
   var stringArray = string.split(' ');
-  string = '';
-  var firstLetter = '';
-  var lowerCase = '';
-  var wordAtI = '';
+  var firstLetter;
+  var lowerCase;
   for (var i = 0; i < stringArray.length; i++) {
-    wordAtI = stringArray[i];
-    firstLetter = wordAtI[0];
-    lowerCase = wordAtI.slice(1);
-    firstLetter = firstLetter.toUpperCase();
-    lowerCase = lowerCase.toLowerCase();
-    wordAtI = firstLetter + lowerCase;
-    string = string + ' ' + wordAtI;
+    firstLetter = stringArray[i][0].toUpperCase();
+    lowerCase = stringArray[i].slice(1).toLowerCase();
+    stringArray[i] = firstLetter + lowerCase;
   }
-  string = string.slice(1);
-  return string;
+  return stringArray.join(' ');
 }
