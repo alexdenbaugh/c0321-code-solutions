@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.light-bulb {
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+}
+
+.light-off-background {
+  background-color: rgba(0, 0, 0, 0.966);
+}
+
+.light-on-background {
+  background-color: #fef9f1;
+}
+
+.light-off {
+  background-color: rgba(58, 58, 58, 0.363);
+  box-shadow: 0 -5px 0 5px black;
+}
+
+.light-on {
+  background-color: #faea84;
+  box-shadow: 0 0 5px 5px #fef4cc;
+}
