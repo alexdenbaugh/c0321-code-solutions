@@ -1,8 +1,8 @@
 var $contactForm = document.querySelector('form');
-var $formControls = {};
 
 $contactForm.addEventListener('submit', function (event) {
   event.preventDefault();
+  var $formControls = {};
   $formControls.name = $contactForm.elements.name.value;
   $formControls.email = $contactForm.elements.email.value;
   $formControls.message = $contactForm.elements.message.value;
