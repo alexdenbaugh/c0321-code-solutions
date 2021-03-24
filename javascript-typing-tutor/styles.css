@@ -9,15 +9,12 @@
 
 .words {
   margin: auto;
-  display: flex;
-  justify-content: center;
 }
 
 .letters {
   font-size: 30px;
   font-family: 'Courier New', Courier, monospace;
   font-weight: 1000;
-  width: 18px;
 }
 
 .green {
