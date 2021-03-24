@@ -9,7 +9,7 @@ document.addEventListener('keydown', function (event) {
   if (currentLetter >= $spanLetter.length) {
     return;
   }
-  if (event.key === $spanLetter[currentLetter] || (event.code === 'Space' && (currentLetter === 6 || currentLetter === 14 || currentLetter === 19 || currentLetter === 25))) {
+  if (event.key === $spanLetter[currentLetter]) {
     $letters[currentLetter].className = 'letters green';
     $letters[currentLetter + 1].className = 'letters underline';
     currentLetter++;
