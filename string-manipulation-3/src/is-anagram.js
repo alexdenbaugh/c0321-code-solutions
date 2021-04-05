@@ -1,22 +1,30 @@
 /* exported isAnagram */
 function isAnagram(firstString, secondString) {
-  var charCountFirst = [];
-  var charCountSecond = [];
-  var noSpace = firstString.split(' ');
-  firstString = noSpace.join('');
-  noSpace = secondString.split(' ');
-  secondString = noSpace.join('');
+  var firstStringArray = firstString.split('');
+  var secondStringArray = secondString.split('');
+  var hasASpace = true;
+  firstStringArray.sort();
+  secondStringArray.sort();
   if (firstString.length !== secondString.length) {
     return false;
   }
-  for (var i = 0; i < firstString.length; i++) {
-    if (secondString.includes(firstString[i])) {
-      charCountFirst = firstString.split(firstString[i]);
-      charCountSecond = secondString.split(firstString[i]);
-      if (charCountFirst.length !== charCountSecond.length) {
-        return false;
-      }
+  while (hasASpace) {
+    if (firstStringArray[0] === ' ') {
+      firstStringArray.shift();
     } else {
+      hasASpace = false;
+    }
+  }
+  hasASpace = true;
+  while (hasASpace) {
+    if (secondStringArray[0] === ' ') {
+      secondStringArray.shift();
+    } else {
+      hasASpace = false;
+    }
+  }
+  for (var i = 0; i < firstString.length; i++) {
+    if (secondStringArray[i] !== firstStringArray[i]) {
       return false;
     }
   }
