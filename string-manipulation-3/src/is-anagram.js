@@ -5,9 +5,6 @@ function isAnagram(firstString, secondString) {
   var hasASpace = true;
   firstStringArray.sort();
   secondStringArray.sort();
-  if (firstString.length !== secondString.length) {
-    return false;
-  }
   while (hasASpace) {
     if (firstStringArray[0] === ' ') {
       firstStringArray.shift();
