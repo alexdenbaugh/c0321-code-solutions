@@ -6,7 +6,7 @@ function flatten(array) {
     return array;
   }
   for (var i = 0; i < array.length; i++) {
-    if (typeof (array[i]) === typeof ([])) {
+    if (Array.isArray(array[i])) {
       if (array[i].length > 1) {
         for (j = 0; j < array[i].length; j++) {
           newArray.push(array[i][j]);
