@@ -4,14 +4,9 @@ function titleCase(string) {
   var wordString = '';
   var firstLetter = '';
   var otherLetters = '';
+  var exceptions = ['and', 'or', 'nor', 'but', 'a', 'an', 'the', 'as', 'at', 'by', 'for', 'in', 'of', 'on', 'per', 'to'];
   for (var i = 0; i < stringArray.length; i++) {
     wordString = stringArray[i];
-    if (stringArray[i] !== 'and' && stringArray[i] !== 'or' && stringArray[i] !== 'nor' && stringArray[i] !== 'but' && stringArray[i] !== 'a' && stringArray[i] !== 'an' && stringArray[i] !== 'the' && stringArray[i] !== 'as' && stringArray[i] !== 'at' && stringArray[i] !== 'by' && stringArray[i] !== 'for' && stringArray[i] !== 'in' && stringArray[i] !== 'of' && stringArray[i] !== 'on' && stringArray[i] !== 'per' && stringArray[i] !== 'to') {
-      firstLetter = wordString[0];
-      otherLetters = wordString.slice(1);
-      firstLetter = firstLetter.toUpperCase();
-      wordString = firstLetter + otherLetters;
-    }
     if (wordString.startsWith('Java')) {
       firstLetter = wordString[4];
       firstLetter = firstLetter.toUpperCase();
@@ -19,9 +14,13 @@ function titleCase(string) {
       otherLetters = otherLetters + firstLetter;
       firstLetter = wordString.slice(5);
       wordString = otherLetters + firstLetter;
-    }
-    if (wordString === 'Api') {
+    } else if (wordString === 'Api') {
       wordString = wordString.toUpperCase();
+    } else if (!exceptions.includes(stringArray[i])) {
+      firstLetter = wordString[0];
+      otherLetters = wordString.slice(1);
+      firstLetter = firstLetter.toUpperCase();
+      wordString = firstLetter + otherLetters;
     }
     if (wordString.includes(':')) {
       otherLetters = stringArray[i + 1];
