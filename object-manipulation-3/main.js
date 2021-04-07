@@ -229,41 +229,40 @@ var cardDeck = [
   }
 ];
 
+var cardKey = {
+  ace: 11,
+  king: 10,
+  queen: 10,
+  jack: 10,
+  10: 10,
+  9: 9,
+  8: 8,
+  7: 7,
+  6: 6,
+  5: 5,
+  4: 4,
+  3: 3,
+  2: 2
+};
+
 function playCards(players, cardDeck, cardsPerHand) {
-  var shuffledDeck = [];
-  var randomNumber;
-  var minNumber = Math.ceil(0);
-  var maxNumber = Math.floor(cardDeck.length);
   var j;
-  var cardCount = 0;
   var playerScore = 0;
   var winner = { name: '', score: 0 };
   var tieBreaker = [];
   var whoTied = [];
-  while (cardDeck.length > shuffledDeck.length) {
-    randomNumber = Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
-    if (!shuffledDeck.includes(cardDeck[randomNumber])) {
-      shuffledDeck.push(cardDeck[randomNumber]);
-    }
-  }
+  var shuffledDeck = _.shuffle(cardDeck);
   for (var i = 0; i < players.length; i++) {
     players[i].hand = [];
   }
   for (i = 0; i < cardsPerHand; i++) {
     for (j = 0; j < players.length; j++) {
-      players[j].hand.push(shuffledDeck[cardCount]);
-      cardCount++;
+      players[j].hand.push(shuffledDeck.shift());
     }
   }
   for (i = 0; i < players.length; i++) {
     for (j = 0; j < cardsPerHand; j++) {
-      if (players[i].hand[j].rank === 'ace') {
-        playerScore = playerScore + 13;
-      } else if (players[i].hand[j].rank === 'king' || players[i].hand[j].rank === 'queen' || players[i].hand[j].rank === 'jack') {
-        playerScore = playerScore + 10;
-      } else {
-        playerScore = playerScore + players[i].hand[j].rank;
-      }
+      playerScore += cardKey[players[i].hand[j].rank];
     }
     if (playerScore > winner.score) {
       winner.name = players[i].name;
