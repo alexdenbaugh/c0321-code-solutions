@@ -2,7 +2,9 @@
 function union(first, second) {
   var newArray = [];
   for (var i = 0; i < first.length; i++) {
-    newArray.push(first[i]);
+    if (!newArray.includes(first[i])) {
+      newArray.push(first[i]);
+    }
   }
   for (i = 0; i < second.length; i++) {
     if (!first.includes(second[i])) {
