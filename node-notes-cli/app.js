@@ -1,6 +1,5 @@
 const fs = require('fs');
 const jsonObject = require('./data.json');
-// console.log(process.argv[2])
 if (process.argv[2] === 'read') {
   for (const key in jsonObject.notes) {
     console.log(`${key} : ${jsonObject.notes[key]}`);
@@ -15,6 +14,13 @@ if (process.argv[2] === 'read') {
   });
 } else if (process.argv[2] === 'delete') {
   delete jsonObject.notes[`${process.argv[3]}`];
+  fs.writeFile('./data.json', JSON.stringify(jsonObject, null, 2), err => {
+    if (err) {
+      throw err;
+    }
+  });
+} else if (process.argv[2] === 'update') {
+  jsonObject.notes[`${process.argv[3]}`] = process.argv[4];
   fs.writeFile('./data.json', JSON.stringify(jsonObject, null, 2), err => {
     if (err) {
       throw err;
