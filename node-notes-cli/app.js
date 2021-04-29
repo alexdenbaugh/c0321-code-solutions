@@ -13,6 +13,13 @@ if (process.argv[2] === 'read') {
       throw err;
     }
   });
+} else if (process.argv[2] === 'delete') {
+  delete jsonObject.notes[`${process.argv[3]}`];
+  fs.writeFile('./data.json', JSON.stringify(jsonObject, null, 2), err => {
+    if (err) {
+      throw err;
+    }
+  });
 } else {
   console.log('Sorry, incorrect command. Valid commands: "read", "create", "delete", "update"');
 }
