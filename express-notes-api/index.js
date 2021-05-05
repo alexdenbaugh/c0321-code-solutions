@@ -31,6 +31,8 @@ app.get('/api/notes/:id', (req, res) => {
 const jsonRequest = express.json();
 app.use(jsonRequest);
 
+const fs = require('fs');
+
 app.post('/api/notes', (req, res) => {
   const response = {};
   if (!req.body.content) {
@@ -40,7 +42,13 @@ app.post('/api/notes', (req, res) => {
     data.notes[`${data.nextId}`] = {};
     data.notes[`${data.nextId}`].id = data.nextId;
     data.notes[`${data.nextId}`].content = req.body.content;
-    res.status(201).send(data.notes[`${data.nextId}`]);
     data.nextId++;
+    fs.writeFile('./data.json', JSON.stringify(data, null, 2), err => {
+      if (err) {
+        res.status(500).send({ error: 'An unexpected error occured.' });
+      } else {
+        res.status(201).send(data.notes[`${data.nextId - 1}`]);
+      }
+    });
   }
 });
