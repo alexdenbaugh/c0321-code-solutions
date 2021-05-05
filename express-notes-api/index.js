@@ -27,3 +27,20 @@ app.get('/api/notes/:id', (req, res) => {
     res.status(404).send(response);
   }
 });
+
+const jsonRequest = express.json();
+app.use(jsonRequest);
+
+app.post('/api/notes', (req, res) => {
+  const response = {};
+  if (!req.body.content) {
+    response.error = 'content is a required field';
+    res.status(400).send(response);
+  } else if (req.body.content) {
+    data.notes[`${data.nextId}`] = {};
+    data.notes[`${data.nextId}`].id = data.nextId;
+    data.notes[`${data.nextId}`].content = req.body.content;
+    res.status(201).send(data.notes[`${data.nextId}`]);
+    data.nextId++;
+  }
+});
