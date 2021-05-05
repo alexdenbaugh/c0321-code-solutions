@@ -1,4 +1,4 @@
-const jsonObject = require('./data.json');
+const data = require('./data.json');
 const express = require('express');
 const app = express();
 
@@ -9,8 +9,21 @@ app.listen(3000, () => {
 
 app.get('/api/notes', (req, res) => {
   const jsonArray = [];
-  for (const k in jsonObject.notes) {
-    jsonArray.push(jsonObject.notes[k]);
+  for (const k in data.notes) {
+    jsonArray.push(data.notes[k]);
   }
   res.status(200).send(jsonArray);
+});
+
+app.get('/api/notes/:id', (req, res) => {
+  const response = {};
+  if (!Number.isInteger(Number(req.params.id)) || Number(req.params.id) <= 0) {
+    response.error = 'id must be a positive integer';
+    res.status(400).send(response);
+  } else if (data.notes[req.params.id]) {
+    res.status(200).send(data.notes[req.params.id]);
+  } else {
+    response.error = `cannot find note with id ${req.params.id}`;
+    res.status(404).send(response);
+  }
 });
