@@ -97,3 +97,29 @@ app.put('/api/grades/:gradeId', (req, res) => {
       res.status(500).send({ error: 'An unexpected error ocurred' });
     });
 });
+
+app.delete('/api/grades/:gradeId', (req, res) => {
+  const gradeId = parseInt(req.params.gradeId);
+  if (!Number.isInteger(gradeId) || gradeId <= 0) {
+    res.status(400).send({ error: "'gradeId' must be a positive integer" });
+    return;
+  }
+  const sql = `
+    delete from "grades"
+     where "gradeId" = $1
+    returning *
+  `;
+  const params = [gradeId];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        res.status(404).send({ error: "'gradeId' does not exist" });
+      }
+      res.sendStatus(204);
+    })
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.error(err);
+      res.status(500).send({ error: 'An unexpected error ocurred' });
+    });
+});
