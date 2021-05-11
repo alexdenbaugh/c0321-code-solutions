@@ -75,8 +75,9 @@ app.put('/api/grades/:gradeId', (req, res) => {
     update "grades"
        set "name"      = $1,
            "course"    = $2,
-           "score      = $3
+           "score"      = $3
      where "gradeId"   = $4
+     returning *
   `;
   const params = [];
   for (const k in req.body) {
