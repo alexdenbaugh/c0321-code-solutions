@@ -34,13 +34,65 @@ app.get('/api/grades', (req, res) => {
 const jsonRequest = express.json();
 app.use(jsonRequest);
 
-// app.post('/api/grades', (req, res) => {
-//   const sql = `
-//     insert into "grades" ("name, "course", "score")
-//     values ($1, $2)
-//     returning *
-//   `;
-//   const params = req.body
-//   // console.log(params)
-//   return
-// })
+app.post('/api/grades', (req, res) => {
+  req.body.score = parseInt(req.body.score, 10);
+  if (!req.body.name || !req.body.course || !req.body.score || !Number.isInteger(req.body.score) || req.body.score < 1 || req.body.score > 100) {
+    res.status(400).send({ error: "invalid 'grade'. Please insure that 'score' is an integer between 1-100 and the following format is used: name=Joe course=math score= 90" });
+    return;
+  }
+
+  const sql = `
+    insert into "grades" ("name", "course", "score")
+    values ($1, $2, $3)
+    returning *
+  `;
+  const params = [];
+  for (const k in req.body) {
+    params.push(req.body[k]);
+  }
+  db.query(sql, params)
+    .then(result => {
+      res.status(201).send(result.rows[0]);
+    })
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.error(err);
+      res.status(500).send({ error: 'An unexpected error ocurred' });
+    });
+});
+
+app.put('/api/grades/:gradeId', (req, res) => {
+  const gradeId = parseInt(req.params.gradeId);
+  req.body.score = parseInt(req.body.score, 10);
+  if (!Number.isInteger(gradeId) || gradeId <= 0) {
+    res.status(400).send({ error: "'gradeId' must be a positive integer" });
+    return;
+  } else if (!req.body.name || !req.body.course || !req.body.score || !Number.isInteger(req.body.score) || req.body.score < 1 || req.body.score > 100) {
+    res.status(400).send({ error: "invalid 'grade' parameters. Please insure that 'score' is an integer between 1-100 and the following format is used: name=Joe course=math score= 90" });
+    return;
+  }
+  const sql = `
+    update "grades"
+       set "name"      = $1,
+           "course"    = $2,
+           "score      = $3
+     where "gradeId"   = $4
+  `;
+  const params = [];
+  for (const k in req.body) {
+    params.push(req.body[k]);
+  }
+  params.push(gradeId);
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        res.status(404).send({ error: "'gradeId' does not exist" });
+      }
+      res.status(200).send(result.rows[0]);
+    })
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.error(err);
+      res.status(500).send({ error: 'An unexpected error ocurred' });
+    });
+});
