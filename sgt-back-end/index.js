@@ -46,10 +46,7 @@ app.post('/api/grades', (req, res) => {
     values ($1, $2, $3)
     returning *
   `;
-  const params = [];
-  for (const k in req.body) {
-    params.push(req.body[k]);
-  }
+  const params = [req.body.name, req.body.course, req.body.score];
   db.query(sql, params)
     .then(result => {
       res.status(201).send(result.rows[0]);
@@ -79,11 +76,7 @@ app.put('/api/grades/:gradeId', (req, res) => {
      where "gradeId"   = $4
      returning *
   `;
-  const params = [];
-  for (const k in req.body) {
-    params.push(req.body[k]);
-  }
-  params.push(gradeId);
+  const params = [req.body.name, req.body.course, req.body.score, gradeId];
   db.query(sql, params)
     .then(result => {
       if (!result.rows[0]) {
