@@ -5,7 +5,7 @@ let Stopwatch = class {
     this.elapsedSeconds = startTimeInSeconds;
   }
 
-  tick = function () {
+  tick() {
     this.elapsedSeconds++;
   }
 
