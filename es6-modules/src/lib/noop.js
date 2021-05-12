@@ -1,3 +1,1 @@
-function noop() {}
-
-export { noop };
+export default function noop() {}

@@ -1,6 +1,6 @@
-import createElement from '../lib';
+import { createElement } from '../lib';
 
-class TodoList {
+export default class TodoList {
   constructor(onToggle) {
     this.onToggle = onToggle;
     this.handleChange = this.handleChange.bind(this);
@@ -48,5 +48,3 @@ class TodoList {
     return todoList;
   }
 }
-
-export { TodoList };
