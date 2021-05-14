@@ -1,0 +1,55 @@
+body {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 500px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.slot {
+  position: absolute;
+  width: 200px;
+  height: 103px;
+  border-radius: 60px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  border: black 2px solid;
+  cursor: pointer;
+}
+
+.switch {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: black 2px solid;
+  background-color: white;
+}
+
+.label {
+  position: absolute;
+  top: 15px;
+  left: 250px;
+  font-size: 60px;
+  font-family: sans-serif;
+  margin: 30px;
+  cursor: pointer;
+}
+
+.on {
+  background-color: #6aa84f;
+  justify-content: flex-end;
+}
+
+.off {
+  background-color: #e2e2e2;
+  justify-content: flex-start;
+}
