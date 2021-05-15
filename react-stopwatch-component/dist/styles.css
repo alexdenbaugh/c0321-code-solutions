@@ -1,0 +1,39 @@
+body {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90px;
+}
+
+.container {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.count {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: black 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: slategray;
+}
+
+span {
+  font-family: sans-serif;
+}
+
+.play {
+  font-size: 60px;
+  margin: 30px;
+  cursor: pointer;
+}
