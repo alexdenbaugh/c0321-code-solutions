@@ -7,84 +7,52 @@ class ValidInput extends React.Component {
     super(props);
     this.state = {
       password: '',
-      valid: false,
-      checkOrX: false,
-      error: ''
+      error: '',
+      icon: 'hidden'
     };
     this.handlePassword = this.handlePassword.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handlePassword(event) {
     this.setState({ password: event.target.value });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    if (this.state.password.length === 0) {
+    if (event.target.value.length === 0) {
       this.setState({
-        valid: false,
-        error: 'A password is required.'
+        error: 'A password is required.',
+        icon: 'fas fa-times'
       });
-    } else if (this.state.password.length < 8) {
+    } else if (event.target.value.length < 8) {
       this.setState({
-        valid: false,
-        error: 'Your password is too short.'
+        error: 'Your password is too short.',
+        icon: 'fas fa-times'
       });
-    } else if (this.state.password.search(/([A-Z])\w+/g) === -1 || this.state.password.search(/\d/g) === -1 || this.state.password.split('').filter(char => specialChars.includes(char)).length === 0) {
+    } else if (event.target.value.search(/([A-Z])\w+/g) === -1 || event.target.value.search(/\d/g) === -1 || event.target.value.split('').filter(char => specialChars.includes(char)).length === 0) {
       this.setState({
-        valid: false,
-        error: 'Your password must contain a capital letter, number and a special character.'
+        error: 'Your password must contain a capital letter, number and a special character.',
+        icon: 'fas fa-times'
       });
     } else {
       this.setState({
-        valid: true,
-        error: ''
+        error: '',
+        icon: 'fas fa-check'
       });
     }
-    this.setState({ checkOrX: true });
   }
 
   render() {
-    if (this.state.valid === false && this.state.checkOrX === true) {
-      return (
-        <form onSubmit={this.handleSubmit} action="">
-          <div>
-            <label htmlFor="password">Password</label>
-          </div>
-          <div className="input">
-            <input onChange={this.handlePassword} type="password" name="password" id="password" value={this.state.password}></input>
-            <i className="fas fa-times"></i>
-          </div>
-          <div>
-            <p> {this.state.error} </p>
-          </div>
-        </form>
-      );
-    } else if (this.state.valid === true && this.state.checkOrX === true) {
-      return (
-        <form onSubmit={this.handleSubmit} action="">
-          <div>
-            <label htmlFor="password">Password</label>
-          </div>
-          <div className="input">
-            <input onChange={this.handlePassword} type="password" name="password" id="password" value={this.state.password}></input>
-            <i className="fas fa-check"></i>
-          </div>
-        </form>
-      );
-    } else {
-      return (
-        <form onSubmit={this.handleSubmit} action="">
-          <div>
-            <label htmlFor="password">Password</label>
-          </div>
-          <div className="input">
-            <input onChange={this.handlePassword} type="password" name="password" id="password" value={this.state.password}></input>
-          </div>
-        </form>
-      );
-    }
+    return (
+      <>
+        <div>
+          <label htmlFor="password">Password</label>
+        </div>
+        <div className="input">
+          <input onChange={this.handlePassword} type="password" name="password" id="password" value={this.state.password}></input>
+          <i className={this.state.icon}></i>
+        </div>
+        <div>
+          <p> {this.state.error} </p>
+        </div>
+      </>
+    );
   }
 }
 
