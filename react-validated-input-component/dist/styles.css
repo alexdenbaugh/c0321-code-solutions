@@ -1,0 +1,42 @@
+i {
+  font-size: 30px;
+  margin-left: 10px;
+}
+
+.fa-check {
+  color: #6ba84f;
+}
+
+.fa-times {
+  color: #cf2a28;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+}
+
+label,
+input {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+p {
+  color: #cf2a28;
+}
+
+label,
+p {
+  padding-left: 5px;
+}
+
+label,
+input,
+p {
+  margin: 8px 0;
+}
+
+.hidden {
+  display: none;
+}
