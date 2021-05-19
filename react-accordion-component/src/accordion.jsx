@@ -8,7 +8,6 @@ class Accordion extends React.Component {
   }
 
   handleClick(event) {
-    // console.log('clicked', event.target)
     const openedTopic = this.props.topics.filter(topic => {
       if (topic.header === event.target.innerText && topic !== this.state.openedTopic) {
         return true;
@@ -19,27 +18,23 @@ class Accordion extends React.Component {
     if (openedTopic === []) {
       this.setState({ openedTopic: null });
     } else {
-      this.setState({ openedTopic: openedTopic });
+      this.setState({ openedTopic: openedTopic[0] });
     }
   }
 
   render() {
-    // console.log('TopicList element:', <TopicList list={this.props.topics} />)
     return (
-      <TopicList list={this.props.topics} openedTopic={this.state.openedTopic} />
+      <TopicList list={this.props.topics} openedTopic={this.state.openedTopic} onClick={this.handleClick} />
     );
   }
 }
 
 function TopicList(props) {
-  // console.log('Im inside TopicList', props.list)
   const topicAccordion = props.list.map(topic => {
-    // console.log('topic', topic)
     return (
-      <ListItem key={topic.header} topic={topic} openedTopic={props.openedTopic} />
+      <ListItem key={topic.header} topic={topic} openedTopic={props.openedTopic} onClick={props.onClick} />
     );
   });
-  // console.log('topicAccordian in TopicList', topicAccordion)
   return (
     <>
       { topicAccordion }
@@ -48,11 +43,10 @@ function TopicList(props) {
 }
 
 function ListItem(props) {
-  // console.log("I'm inside ListItem", props.openedTopic)
   if (props.topic === props.openedTopic) {
     return (
       <>
-        <div onClick={Accordion.handleClick} className='header'>
+        <div className='header' onClick={props.onClick}>
           <h2>{props.topic.header}</h2>
         </div>
         <div className="details">
@@ -62,7 +56,7 @@ function ListItem(props) {
     );
   } else {
     return (
-      <div onClick={Accordion.handleClick} className='header'>
+      <div className='header' onClick={props.onClick}>
         <h2>{props.topic.header}</h2>
       </div>
     );
