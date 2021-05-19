@@ -1,0 +1,19 @@
+.header {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.header,
+.details {
+  width: 400px;
+  padding: 0 10px;
+  border: black 2px solid;
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+p {
+  font-weight: 600;
+}
