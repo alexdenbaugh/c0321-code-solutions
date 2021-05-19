@@ -15,7 +15,7 @@ class Accordion extends React.Component {
         return false;
       }
     });
-    if (openedTopic === []) {
+    if (openedTopic.length === 0) {
       this.setState({ openedTopic: null });
     } else {
       this.setState({ openedTopic: openedTopic[0] });
