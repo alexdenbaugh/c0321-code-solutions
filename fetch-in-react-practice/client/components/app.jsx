@@ -50,7 +50,7 @@ export default class App extends React.Component {
     fetch('/api/todos', init)
       .then(response => response.json())
       .then(todo => {
-        const newTodos = this.state.todos;
+        const newTodos = this.state.todos.map(todo => todo);
         newTodos.push(todo);
         this.setState({ todos: newTodos });
       });
