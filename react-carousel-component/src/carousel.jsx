@@ -23,20 +23,20 @@ const images = [
   }
 ];
 
-let intervalId;
-
 class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       imageIndex: 0
+
     };
     this.handleClick = this.handleClick.bind(this);
     this.carouselChange = this.carouselChange.bind(this);
+    this.intervalId = setInterval(this.carouselChange, 3000);
   }
 
   handleClick(event) {
-    clearInterval(intervalId);
+    clearInterval(this.intervalId);
     let index;
     if (event.target.getAttribute('data-view') === 'right') {
       index = this.state.imageIndex === images.length - 1
@@ -50,12 +50,7 @@ class Carousel extends React.Component {
       index = Number(event.target.getAttribute('data-view'));
     }
     this.setState({ imageIndex: index });
-    intervalId = setInterval(this.carouselChange, 3000);
-  }
-
-  //
-  componentDidMount() {
-    intervalId = setInterval(this.carouselChange, 3000);
+    this.intervalId = setInterval(this.carouselChange, 3000);
   }
 
   carouselChange() {
