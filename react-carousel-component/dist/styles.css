@@ -1,0 +1,32 @@
+#root {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.arrow {
+  width: 20%;
+}
+
+.pokemon {
+  width: 60%;
+}
+
+div.arrow i {
+  font-size: 60px;
+  cursor: pointer;
+}
+
+.fa-circle {
+  margin: 0 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
