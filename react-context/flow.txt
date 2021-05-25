@@ -1,0 +1,222 @@
+1: User can sign up
+  << => index.jsx >>
+    - Starting on the Client side, an instance of "App" component is constructed.
+
+  << => app.jsx >>
+    - App is construced, props are defined, this.state is defined, "this" is bound
+      to this.handleSignIn, this.handleSignOut
+    - App.render is called, since "this.state.isAuthorizing is true, null is returned
+      and an empty "App" component is mounted onto the dom.
+    - Then App.componentDidMount is called, isAuthorizing is set to false.
+    - render method is called because this.state changed, user, route, handleSignIn,
+      handleSignOut, are being assigned with values from this, then those values
+      are being put in an object and that object is being assigned to contextValue
+    - Then a react element is being returned, specifically, AppContext is being assigned
+      as the provider for the Navbar component, and the PageContainer component,
+      and their chldren.
+    - AppContext is imported from app-context.js which was created with the createContext
+      method of the React object.
+    - the contextValue object previously defined, is being assigned to the value
+      property of context.
+    - An instance of the Navbar class component is being constructed
+
+  << => navbar.jsx >>
+    - Navbar.render is called, user and handleSignOut are being destructured from
+      context (which is AppContext).
+    - A chuck of React elements (including the logo/link, the sign-in and sign-up buttons) that represent the navigation bar of the index.html
+      are being returned from the method.
+
+  << => app.jsx >>
+    - PageContainer function component is being called.
+
+  << => page-container.jsx >>
+    - a chunk of react elements are being returned from the function, including
+      the "children" argument being a callback function of the App.renderPage method.
+
+  << => app.jsx >>
+    - check path, calls Home component and returns created component
+
+  << => home.jsx >>
+    - context.user is null, so Redirect component is called with one prop, to="sign-up"
+      and the the result is being returned.
+
+  << => redirect.jsx >>
+    - a new URL object with a parameter of the current page's url, is being assigned
+      to the variable url, props.to is "sign-up" so "#sign-up" is being assigned
+      to the hash property of url.
+    - then window.location.replace is called with url to redirect to url.
+    - then return all the way to app.jsx
+
+  << => app.jsx >>
+    - because the # changed, the event listener triggers, calling the parseRoute function
+
+  << => parse-route.js >>
+    - the hash route is split into the root path, and the rest of the url is specific
+      to the view.
+    - A new URLSearchParams object is created and passed the queryString.
+      Info of the new url is returned.
+
+  << => app.jsx >>
+    - the return is set to this.state.route triggering a re-render of app.
+    - render method is called again, context params are updated.
+    - Because route.path is changed, the renderPage method is called and the Home
+      component is replaced with the Auth component.
+
+  << => auth.jsx >>
+    - user is null so Riderect component isn't returned.
+    - weclomeMessage is created based on route.path, the elements of the page are
+      returned, and AuthForm component is created with specific params related to
+      sign-up.
+
+  << => auth-form.jsx >>
+    - AuthForm component is constructed, and then the form is rendered with properties
+      and attributes related to "sign-up".
+    - the React elements are returned ( >> auth.jsx >> app.jsx)
+
+  << => app.jsx >>
+    - The component is complete, and returned to index.jsx
+
+  << => index.jsx >>
+    - now that the creation is completed, the App component is appeneded to the #root
+      div in the server's index.html
+
+  << auth-form.jsx >>
+    - Now, when ever something is typed in the username or password inputs of the
+      form, AuthForm.handleChange is called, updating the username or password value
+      in the state, rerendering AuthForm.
+    - When the "Register" button is clicked, the form is submitted and AuthForm.handleSubmit
+      method is called.
+    - this.props.action was defined in auth.jsx as "sign-up", req is defined with
+      the necessary method, header and body parameters for the "post" request to the
+      server.
+    - fetch method is called and a post request to the server at /api/auth/sign-up is
+      sent with the necessary header and body parameters.
+
+  << => ../../server/public/index.js >>
+    - username, and password are checked if falsy.
+    - argon2 hashes the password, then sql expression is defined to insert a new
+      user into the database
+    - the database is queried, adding the user and hashed password to the database,
+      and returning the added userid, username, and createdAt.
+    - the contents returned from the database server, are destructured from the
+      result, and then a 201 status and the created info is sent back to the client.
+
+  << => ../client/components/auth-form.jsx >>
+    - the response, is reformatted from JSON to JS, the window.location.hash is
+      updated to "sign-in". Since there is no token, nothing happens, and the hash
+      change event listener is triggered.
+
+  << => app.jsx >>
+    - the new sign-in route is parsed and updated, changeing the state and rerendering
+
+  << => auth.jsx >>
+    - the Auth react element is rerendered, changing the necessary attributes and
+      values to sign-in including changing the params of AuthForm, triggering
+      the AuthForm component to re-render...
+
+1: User can sign in
+
+  << => auth-form.jsx >>
+    - the handleChange method is triggered when the form's input values change
+      by the user.
+    - when the "Log In" button is clicked, the form is submitted triggering the
+      handleSubmit method.
+    - the action being "sign-in", the request's method, header and body are assigned,
+      and then a post request to localhost/api/auth/sign-in is sent.
+
+  << => server/index.js >>
+    - username and password verified not falsy, the sql commands are formed, and
+      the user value is being assigned to params.
+    - the database is queried, returning the userId, and hashedPassword for the user,
+    - if the user doesn't exist in the database, an error is sent to the client
+      (being thrown to errorMiddleware.js to specify the error message and status).
+    - if it does exist, the userId and hashedPassword values are pulled, and the
+      the password and hashedpassword are inputed into argon2.verify to verify if
+      they match.
+    - if they don't match, an error is thrown, if they do, the userId and username
+      are assigned to an object, and that object is passed into jwt.sign along with
+      the server's token secret (found in the .env file) to return a token for the
+      user.
+    - then the returned token and the payload are assigned to an object and are sent
+      back to the client.
+
+  << => auth-form.jsx >>
+    - the response from the server, is passed as an argument to the onSign method
+      (App.handleSignIn) call.
+
+  << => app.jsx >>
+    - in the handleSignIn method, the user object and the token variable are
+      destructured from the result.
+    - localStorage is updated with the current token
+    - the user in state is changed, triggering the render method to be called.
+    - Auth component is re-rendered.
+
+  << => auth.jsx >>
+    - since there is a user, AuthPage returns the Riderect component with props.to
+      being an empty string.
+
+  << => redirect.jsx >>
+    - the window location is changed with the new url including a '#', triggering
+      hashchange event listener.
+
+  << => app.jsx >>
+    - a new route is parsed and updated to this.state.route, triggering the render method
+      of App component.
+    - since the path = '', Home component is returned.
+
+  << => home.jsx >>
+    - a group of React Elements are created and returned with the specified attributes
+
+  << => index.jsx >>
+    - everything is done rendering, and App component is updated.
+
+User can stay signed in (even if they refresh the page).
+
+  << => index.jsx >>
+    - In the scenario of refreshing, an new App component is recreated.
+
+  << => app.jsx >>
+    - app is constructed, state is set with user = null, isauthorizing = true,
+      and route = parsedRoute of the current window.location.hash, being #.
+    - render method is called, and null is returned
+    - App is done rendering, and componentDidMount is called.
+    - the token of the current user is grabbed from localStorage (since the user
+      didn't sign out), and then token is decoded and assigned to the user property
+      in this.state
+    - user, and isAuthorizing are changed, so render method is called again
+    - the path is set to '' so Home is called, which creates the necessary React Elements.
+    - App is done rendering, returned to index.jsx and then added to the dom at the same
+      page after refreshing because window.location didn't change, and the user's,
+      token was saved in localStorage.
+
+4. User can sign out.
+  << => app.jsx >>
+    - when at the home page, and sign out button is pressed, the app.handleSignOut
+      method is called.
+    - localStorage removes the token variable, and the user property of this.state
+      is set to null, triggering the render method.
+    - isAuthorizing is still false, so the react elements are created, including
+      Home component.
+
+  << => home.jsx >>
+    - because user is now null, Redirect component is returned from Home,
+
+  << => redirect.jsx >>
+    - the window.location is changed to "path/#sign-in" triggering the hashchange
+      event listener.
+
+  << => app.jsx >>
+    - the route property is assigned the return of the new parsed route, triggering
+      app.render call
+    - the React Elements are formed and renderPage is called
+    - since path = sign-in, Auth component is called.
+
+  << => auth.jsx >>
+    - the react elements are created based on the attributes and properties related
+      to "sign-in" including AuthForm component.
+
+  << => auth-form.jsx >>
+    - the form react element is created in auth-form.render method with the attrubutes
+      and properties related to "sign-in".
+    - then, App is finished rendering, and the dom is updated with the sign-in form
+      view, without any user's token.
